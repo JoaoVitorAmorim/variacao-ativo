@@ -1,16 +1,7 @@
-const String server = 'https://dev-eab.wattio.com.br';
+import '../../Model/ativo.dart';
 
-enum Routes {
-  delete('$server/delete'),
-  put('$server/put'),
-  get('$server/api/v4/search'),
-  post('$server/get'),
-  login('$server/api/v4/user');
-
-  const Routes(this.url);
-  final String url;
-}
+const String server = 'https://query2.finance.yahoo.com/v8/finance/chart/';
 
 abstract class IRepository {
-  // Future<Pregao> getPregao(final String token);
+  Future<Ativo> getAtivo(final String symbol);
 }

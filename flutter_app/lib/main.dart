@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/views/list_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,9 +46,10 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) {
-                return Text('eba');
-              },
+              builder: (context) => Scaffold(
+                appBar: AppBar(title: const Text('AGORA É FLUTTER NA ÁREA ')),
+                body: const AtivosListView(),
+              ),
             ),
           );
         },

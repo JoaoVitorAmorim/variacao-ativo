@@ -16,75 +16,8 @@ class ServiceWebHttp implements IServiceWebRequest {
       {Map<String, String>? headers}) async {
     late final http.Response response;
 
-    if (kIsWeb) {
-      response = await http.get(Uri.parse(url), headers: headers);
-    } else {
-      response = await Isolate.run<http.Response>(
-          () => http.get(Uri.parse(url), headers: headers));
-    }
-
-    return ServiceWebResponse(
-        statusCode: response.statusCode,
-        body: response.body,
-        headers: response.headers);
-  }
-
-  @override
-  Future<IServiceWebResponse> post(String url,
-      {Object? body, Map<String, String>? headers, Encoding? encoding}) async {
-    late final http.Response response;
-
-    if (kIsWeb) {
-      response = await http.post(Uri.parse(url),
-          headers: headers, body: body, encoding: encoding);
-    } else {
-      response = await Isolate.run<http.Response>(
-        () => http.post(Uri.parse(url),
-            headers: headers, body: body, encoding: encoding),
-      );
-    }
-
-    return ServiceWebResponse(
-        statusCode: response.statusCode,
-        body: response.body,
-        headers: response.headers);
-  }
-
-  @override
-  Future<IServiceWebResponse> delete(String url,
-      {Object? body, Map<String, String>? headers, Encoding? encoding}) async {
-    late final http.Response response;
-
-    if (kIsWeb) {
-      response = await http.delete(Uri.parse(url),
-          headers: headers, body: body, encoding: encoding);
-    } else {
-      response = await Isolate.run<http.Response>(
-        () => http.delete(Uri.parse(url),
-            headers: headers, body: body, encoding: encoding),
-      );
-    }
-
-    return ServiceWebResponse(
-        statusCode: response.statusCode,
-        body: response.body,
-        headers: response.headers);
-  }
-
-  @override
-  Future<IServiceWebResponse> put(String url,
-      {Object? body, Map<String, String>? headers, Encoding? encoding}) async {
-    late final http.Response response;
-
-    if (kIsWeb) {
-      response = await http.put(Uri.parse(url),
-          headers: headers, body: body, encoding: encoding);
-    } else {
-      response = await Isolate.run<http.Response>(
-        () => http.put(Uri.parse(url),
-            headers: headers, body: body, encoding: encoding),
-      );
-    }
+    response = await http.get(Uri.parse(url), headers: headers);
+    () => http.get(Uri.parse(url), headers: headers);
 
     return ServiceWebResponse(
         statusCode: response.statusCode,
