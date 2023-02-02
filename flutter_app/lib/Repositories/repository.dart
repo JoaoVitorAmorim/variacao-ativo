@@ -12,6 +12,7 @@ class Repository implements IRepository {
   Future<Ativo> getAtivo(String symbol) async {
     final response =
         await _iServiceWebRequest.get(server + symbol, headers: {});
-    return Ativo.fromJson(json.decode(response.body)['chart']['result'][0]['meta'] as Map);
+    return Ativo.fromJson(
+        json.decode(response.body)['chart']['result'][0] as Map);
   }
 }
