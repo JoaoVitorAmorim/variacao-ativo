@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         child: const Text('Go To Flutter'),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
