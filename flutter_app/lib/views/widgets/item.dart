@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class Item extends StatefulWidget {
   final String label, label2;
   final IconData iconData;
+  final Color color;
 
   const Item({
     required this.label,
     required this.label2,
     required this.iconData,
+    required this.color,
     super.key,
   });
 
@@ -31,7 +33,7 @@ class _ItemState extends State<Item> {
               children: [
                 Material(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.blue,
+                    color: widget.color,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Icon(

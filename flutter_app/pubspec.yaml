@@ -37,6 +37,7 @@ dependencies:
   flutter_bloc:
   http: ^0.13.5
   candlesticks: ^2.1.0
+  interactive_chart: ^0.3.4
 
 dev_dependencies:
   flutter_test:

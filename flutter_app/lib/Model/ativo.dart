@@ -3,11 +3,13 @@
 import 'dart:ffi';
 
 import 'package:candlesticks/candlesticks.dart';
+import 'package:interactive_chart/interactive_chart.dart';
+import 'package:interactive_chart/interactive_chart.dart';
 
 class Ativo {
   final String? currency;
-  final String? regularMarketPrice;
-  final String? previousClose;
+  final double? regularMarketPrice;
+  final double? previousClose;
   final String symbol;
   final List<double>? open;
   final List<double>? close;
@@ -16,9 +18,11 @@ class Ativo {
   final List<int>? volume;
   final List<int>? timeStramp;
   final List<Candle>? candle;
+  final List<CandleData>? candleData;
 
   Ativo({
     required this.symbol,
+    this.candleData,
     this.timeStramp,
     this.volume,
     this.high,
@@ -32,13 +36,6 @@ class Ativo {
   }) : super();
 
   factory Ativo.fromJson(Map<dynamic, dynamic> json) {
-    final candle = Candle(
-        date: DateTime.now(),
-        open: 1780.36,
-        high: 1873.93,
-        low: 1755.34,
-        close: 1848.56,
-        volume: 0);
     List<double> _open = [];
     List<double> _close = [];
     List<double> _high = [];
@@ -46,6 +43,8 @@ class Ativo {
     List<int> _volume = [];
     List<int> _timeStamp = [];
     List<Candle> _candle = [];
+    List<CandleData> _candleData = [];
+
     final len = (json['indicators']['quote'][0]['open'] as List).length;
     for (int i = 0; i < len; i++) {
       _open.add(json['indicators']['quote'][0]['open'][i] ?? 0);
@@ -53,9 +52,7 @@ class Ativo {
       _high.add(json['indicators']['quote'][0]['high'][i] ?? 0);
       _low.add(json['indicators']['quote'][0]['low'][i] ?? 0);
       _volume.add(json['indicators']['quote'][0]['volume'][i] ?? 0);
-      _timeStamp.add(
-        json['timestamp'][i] ?? 0,
-      );
+      _timeStamp.add(json['timestamp'][i] ?? 0);
       _candle.add(
         Candle(
           date: DateTime(_timeStamp[i]),
@@ -66,12 +63,20 @@ class Ativo {
           volume: double.tryParse(_volume[i].toString()) ?? 0,
         ),
       );
+      _candleData.add(CandleData(
+        timestamp: _timeStamp[i],
+        high: _high[i],
+        low: _low[i],
+        open: _open[i],
+        close: _close[i],
+        volume: double.tryParse(_volume[i].toString()) ?? 0,
+      ));
     }
 
     return Ativo(
       symbol: json['meta']['symbol'],
-      regularMarketPrice: json['meta']['regularMarketPrice'].toString(),
-      previousClose: json['meta']['previousClose'].toString(),
+      regularMarketPrice: json['meta']['regularMarketPrice'],
+      previousClose: json['meta']['previousClose'],
       open: _open,
       close: _close,
       high: _high,
@@ -79,6 +84,7 @@ class Ativo {
       volume: _volume,
       timeStramp: _timeStamp,
       candle: _candle,
+      candleData: _candleData,
     );
   }
 }

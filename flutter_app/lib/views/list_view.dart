@@ -10,17 +10,18 @@ class AtivosListView extends StatefulWidget {
 
 class _AtivosListViewState extends State<AtivosListView> {
   static List<String> ativos = [
-    '^DJI',
-    '^IXIC',
-    '^RUT',
-    '^DJI',
-    '^DJI',
-    '^DJI',
-    '^DJI',
-    '^DJI',
-    '^DJI',
+    'TSLA',
+    'GOOG',
+    'META',
+    'BTC-USD',
+    'AMZN',
+    'AAPL',
+    'NFLX',
+    'AMC',
     '^DJI'
   ];
+
+  final controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,36 @@ class _AtivosListViewState extends State<AtivosListView> {
       child: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
+          const Center(
+              child: Text(
+            'PESQUISAR ATIVO',
+            style: TextStyle(fontSize: 20),
+          )),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Center(
+              child: SizedBox(
+                width: 200,
+                child: TextFormField(
+                  controller: controller,
+                  onFieldSubmitted: (_) => {pushFormView(context)},
+                ),
+              ),
+            ),
+          ),
           for (String ativo in ativos) ativoCardFactory(context, ativo),
         ],
+      ),
+    );
+  }
+
+  Future<dynamic> pushFormView(BuildContext context) {
+    return Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FormView(
+          symbol: controller.text,
+        ),
       ),
     );
   }

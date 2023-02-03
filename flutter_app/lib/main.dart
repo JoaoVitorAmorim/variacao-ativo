@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -34,28 +35,30 @@ class _MyHomePageState extends State<MyHomePage> {
     const String viewType = '<platform-view-type>';
     final Map<String, dynamic> creationParams = <String, dynamic>{};
 
-    return Scaffold(
-      body: AndroidView(
-        viewType: viewType,
-        layoutDirection: TextDirection.ltr,
-        creationParams: creationParams,
-        creationParamsCodec: const StandardMessageCodec(),
-      ),
-      floatingActionButton: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Scaffold(
-                appBar: AppBar(title: const Text('AGORA É FLUTTER NA ÁREA ')),
-                body: const AtivosListView(),
+    return SafeArea(
+      child: Scaffold(
+        body: AndroidView(
+          viewType: viewType,
+          layoutDirection: TextDirection.ltr,
+          creationParams: creationParams,
+          creationParamsCodec: const StandardMessageCodec(),
+        ),
+        floatingActionButton: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Scaffold(
+                  appBar: AppBar(title: const Text('AGORA É FLUTTER NA ÁREA ')),
+                  body: const AtivosListView(),
+                ),
               ),
-            ),
-          );
-        },
-        child: const Text('Go To Flutter'),
+            );
+          },
+          child: const Text('Go To Flutter'),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
