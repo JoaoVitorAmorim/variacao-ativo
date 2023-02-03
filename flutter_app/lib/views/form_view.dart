@@ -1,3 +1,4 @@
+import 'package:candlesticks/candlesticks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/BLoC/ativo_bloc.dart';
 import 'package:flutter_app/views/error_view.dart';
@@ -32,8 +33,7 @@ class _FormViewState extends State<FormView> {
           switch (state.runtimeType) {
             case Success:
               final ativo = (state as Success).ativo;
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              return ListView(
                 children: [
                   const SizedBox(
                     height: 40,
@@ -54,7 +54,18 @@ class _FormViewState extends State<FormView> {
                     label: 'Fechameto Anterior',
                     label2: 'R\$ ${ativo.previousClose!}',
                     iconData: Icons.auto_graph_rounded,
-                  )
+                  ),
+                  linhazinhaMarota(),
+                  ElevatedButton(
+                      onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Center(
+                                child: Candlesticks(candles: ativo.candle!),
+                              ),
+                            ),
+                          ),
+                      child: const Icon(Icons.graphic_eq)),
                 ],
               );
             case Error:

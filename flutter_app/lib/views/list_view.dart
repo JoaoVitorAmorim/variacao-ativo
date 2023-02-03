@@ -11,8 +11,8 @@ class AtivosListView extends StatefulWidget {
 class _AtivosListViewState extends State<AtivosListView> {
   static List<String> ativos = [
     '^DJI',
-    '^DJI',
-    '^DJI',
+    '^IXIC',
+    '^RUT',
     '^DJI',
     '^DJI',
     '^DJI',

@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_bloc:
   http: ^0.13.5
+  candlesticks: ^2.1.0
 
 dev_dependencies:
   flutter_test:
