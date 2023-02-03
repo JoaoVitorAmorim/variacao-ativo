@@ -30,20 +30,28 @@ class _AtivosListViewState extends State<AtivosListView> {
       child: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
-          const Center(
-              child: Text(
-            'PESQUISAR ATIVO',
-            style: TextStyle(fontSize: 20),
-          )),
           Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: Center(
-              child: SizedBox(
-                width: 200,
-                child: TextFormField(
-                  controller: controller,
-                  onFieldSubmitted: (_) => {pushFormView(context)},
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 200,
+                    child: TextFormField(
+                      decoration:
+                          const InputDecoration(hintText: 'PESQUISAR ATIVO'),
+                      controller: controller,
+                      onFieldSubmitted: (_) => {pushFormView(context)},
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      pushFormView(context);
+                    },
+                    child: const Icon(Icons.search),
+                  )
+                ],
               ),
             ),
           ),
